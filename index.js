@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.argv.length == 2 ? process.env.token : '';
-const welcomeChannelName = "안녕하세요";
-const byeChannelName = "안녕히가세요";
-const welcomeChannelComment = "어서오세요.";
-const byeChannelComment = "안녕히가세요.";
+const welcomeChannelName = "사유지입구";
+const byeChannelName = "사유지출구";
+const welcomeChannelComment = "어서오세요, 사유지에 오신걸환영합니다";
+const byeChannelComment = "안녕히가세요!";
 
 client.on('ready', () => {
   console.log('켰다.');
+  client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -17,7 +18,7 @@ client.on("guildMemberAdd", (member) => {
 
   welcomeChannel.send(`<@${newUser.id}> ${welcomeChannelComment}\n`);
 
-  member.addRole(guild.roles.find(role => role.name == "게스트"));
+  member.addRole(guild.roles.find(role => role.name == "사유지 방문자"));
 });
 
 client.on("guildMemberRemove", (member) => {
@@ -31,41 +32,40 @@ client.on("guildMemberRemove", (member) => {
 client.on('message', (message) => {
   if(message.author.bot) return;
 
-  if(message.content == 'ping') {
-    return message.reply('pong');
+  if(message.content == '안녕') {
+    return message.reply('안녕하세요');
   }
 
-  if(message.content == 'embed') {
-    let img = 'https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256';
+  if(message.content == '@help2') {
+    let img = 'https://cdn.discordapp.com/attachments/737597103953543188/744914139931213884/1_25.png';
     let embed = new Discord.RichEmbed()
-      .setTitle('타이틀')
+      .setTitle('로봇 소개')
       .setURL('http://www.naver.com')
-      .setAuthor('나긋해', img, 'http://www.naver.com')
+      .setAuthor('파이리', img, 'http://www.naver.com')
       .setThumbnail(img)
       .addBlankField()
-      .addField('Inline field title', 'Some value here')
-      .addField('Inline field title', 'Some value here', true)
-      .addField('Inline field title', 'Some value here', true)
-      .addField('Inline field title', 'Some value here', true)
-      .addField('Inline field title', 'Some value here1\nSome value here2\nSome value here3\n')
+      .addField('현재 4번째의 봇완성체', '1,2,3번는 고장남,아니면 쓸모가없어짐')
+      .addField('파이리님의 디코서버문의제작', '무료로 해드립니다,개발자님한테 디엠주세요', true)
+      .addField('파이리님의 핵대리사업', '가격표는 그때알려주겠습니다,디엠주세요', true)
       .addBlankField()
       .setTimestamp()
-      .setFooter('나긋해가 만듬', img)
+      .setFooter('로봇 개발자:파이리812#1482', img)
 
     message.channel.send(embed)
-  } else if(message.content == 'embed2') {
-    let helpImg = 'https://images-ext-1.discordapp.net/external/RyofVqSAVAi0H9-1yK6M8NGy2grU5TWZkLadG-rwqk0/https/i.imgur.com/EZRAPxR.png';
+  } else if(message.content == '@help') {
+    let helpImg = 'https://cdn.discordapp.com/attachments/737597103953543188/744914139931213884/1_25.png';
     let commandList = [
-      {name: 'ping', desc: '현재 핑 상태'},
-      {name: 'embed', desc: 'embed 예제1'},
-      {name: 'embed2', desc: 'embed 예제2 (help)'},
-      {name: '!전체공지', desc: 'dm으로 전체 공지 보내기'},
+      {name: 'ping', desc: 'pong'},
+      {name: '@help', desc: '로봇의 명령어를 알려줍니다'},
+      {name: '@help2', desc: '로봇의 대해 소개를 시켜줍니다'},
+      {name: '!전체공지', desc: '서버에있는 사람들에게 DM공지를 보냅니다'},
+      {name: '!청소', desc: '대량의 메세지를 보냅니다'},
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
-      .setAuthor('Help of 콜라곰 BOT', helpImg)
+      .setAuthor('로봇 개발자:파이리812#1482', helpImg)
       .setColor('#186de6')
-      .setFooter(`콜라곰 BOT ❤️`)
+      .setFooter(`로봇사유지 출신`)
       .setTimestamp()
     
     commandList.forEach(x => {
