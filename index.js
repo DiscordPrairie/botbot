@@ -47,6 +47,7 @@ client.on('message', (message) => {
       .addField('현재 4번째의 봇완성체', '1,2,3번는 고장남,아니면 쓸모가없어짐')
       .addField('파이리님의 디코서버문의제작', '무료로 해드립니다,개발자님한테 디엠주세요', true)
       .addField('파이리님의 핵대리사업', '가격표는 그때알려주겠습니다,디엠주세요', true)
+      .addField('로봇를 만든사람들', '파이리812#1482,파이리입니다#1861,파일이#6327', true)
       .addBlankField()
       .setTimestamp()
       .setFooter('로봇 개발자:파이리812#1482', img)
