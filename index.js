@@ -8,7 +8,37 @@ const byeChannelComment = "안녕히가세요!";
 
 client.on('ready', () => {
   console.log('켰다.');
-  client.user.setPresence({ game: { name: '@help' }, status: 'online' })
+  (async function () {
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    };
+    console.log(client.user.tag)
+console.log(client.user.id)
+console.log('\n봇이 준비 되었습니다.');
+answered1 = true;
+answered2 = true;
+answered3 = true;
+userAnswer1 = "";
+userAnswer2 = "";
+userAnswer3 = "";
+    var i = 0;
+    while (i < 10) {
+        client.user.setPresence({
+            activity: {
+                name: '@help'
+            },
+            status: 'online'
+        })
+        await sleep(5000)
+        client.user.setPresence({
+            activity: {
+                name: `봇 정상 작동중`
+            },
+            status: 'online'
+        })
+        await sleep(5000)
+    }
+})();
 });
 
 client.on("guildMemberAdd", (member) => {
